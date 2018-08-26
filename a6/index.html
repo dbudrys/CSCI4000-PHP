@@ -1,0 +1,111 @@
+<!-- Domas Budrys Assignmnet 6.  04/21/2017        Question 3  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Domas Budrys Kung Fu School</title>
+<meta charset="utf-8">
+<link href="main.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    
+    <script type="text/javascript">
+        
+        function queryGPA() {
+            
+            var ajaxRequest;
+            
+            try{
+			// Opera 8.0+, Firefox, Safari
+			ajaxRequest = new XMLHttpRequest();
+            } catch (e){
+                
+			// Internet Explorer Browsers
+			try{
+				ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+                
+				try{
+					ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e){
+                    
+					// Something went wrong
+					alert("Something Wrong Happend ");
+					return false;
+				}
+			}
+		}
+        
+        
+        ajaxRequest.onreadystatechange = function() {
+            if (ajaxRequest.readyState == 4) {
+                var ajaxDisplay = document.getElementById('ajaxResult');
+                ajaxDisplay.innerHTML = ajaxRequest.responseText;
+            }// end of if
+              
+        }//end of  ajaxRequest.onreadystatechange
+        
+        
+        var GPA = document.getElementById('inputGPA').value;
+        var queryString = "?GPA=" + GPA;
+        ajaxRequest.open("GET", "domas_budrys_search.php" + queryString, true);
+        ajaxRequest.send(null);
+        
+        
+       // window.alert(inputGPA);
+            
+        }//end of queryGPA 
+        
+        
+    </script>
+    
+    
+    
+
+<header>
+    <h1>Domas Budrys Kung Fu School - Search Students</h1>
+</header>
+
+<main>
+
+    <h2>Search for students with the minimum GPA</h2>
+
+
+	
+    <form name="myForm">
+        Minimum GPA :
+        <input id="inputGPA" type="text" style="margin-left: 50px ">
+        <br>
+        
+        <input type="button" onclick="queryGPA();" value="Search"   style="margin-left: 163px ">
+        
+        
+    </form>
+    <br>
+    
+    <div id="ajaxResult">Students with GPAs higher than minimum will be displayed here</div>
+
+
+    <br>
+	<br>
+	
+    <a href="domas_budrys_ajaxsearch_single.html">Search &amp; Split</a>
+	
+	<br>
+
+	
+</main>
+
+
+<footer>
+    <br>
+    &#169;  Domas  Budrys Kung Fu School
+</footer>
+
+ 
+</body>
+
+</html>
